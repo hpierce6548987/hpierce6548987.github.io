@@ -1,4 +1,9 @@
-<div id="container"></div>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div id="container"></div>
 
 <div>
     <h1>googlepay_payment_data</h1>
@@ -154,7 +159,7 @@
             allowedPaymentMethods: [{
                 type: 'CARD',
                 parameters: {
-                    allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+                    allowedAuthMethods: ["CRYPTOGRAM_3DS"],
                     allowedCardNetworks: ["AMEX", "DISCOVER", "INTERAC", "JCB", "MASTERCARD", "VISA"]
                 },
                 tokenizationSpecification: {
@@ -235,3 +240,8 @@
           src="https://pay.google.com/gp/p/js/pay.js"
           onload="onGooglePayLoaded()">
 </script>
+    </body>
+</html>
+
+
+
