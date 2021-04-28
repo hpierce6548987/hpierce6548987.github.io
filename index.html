@@ -16,8 +16,19 @@
 </head>
 <body>
 <h1>This is first party content</h1>
-    <iframe src="https://dev0-sch.corp.nmi.com/~hpierce/nm-gateway/web/r/hue6v" width="500" height="1000">
+    <input type="text" id="src" placeholder="https://dev0-sch.corp.nmi.com/~hpierce/nm-gateway/web/r/hue6v">
+    <button id="submit">Construct iframe</button>
+    <script>
+        document.querySelector('#submit').addEventListener('click', function(e) {
+            var src = document.querySelector('#src').value;
 
-    </iframe>
+            var iframe = document.createElement('iframe');
+            iframe.setAttribute('src', src);
+            iframe.setAttribute('width', 500);
+            iframe.setAttribute('height', 1000);
+
+            document.querySelector('body').appendChild(iframe);
+        });
+    </script>
 </body>
 </html>
