@@ -1,248 +1,256 @@
 <html>
 <head>
-    <script src="https://secure.networkmerchants.com/token/Collect.js" data-tokenization-key="459Pr6-uj8NTQ-8G2Pcp-kpAZ5A"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://secure.nmi.com/contrib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://secure.nmi.com/contrib/font-awesome/css/all.css">
+    <script src="https://secure.nmi.com/contrib/js/ora/jquery-1.11.1.min.js"></script>
+    <script src="https://secure.nmi.com/contrib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <style>
-        input {
-            border: 5px inset #808080;
-            background-color: #c0c0c0;
-            color: green;
-            font-size: 25px;
-            font-family: monospace;
-            padding: 5px;
+        .container {
+            max-width: 1000px;
+        }
+
+        .payButtonContainer {
+            margin-top: 10px;
+        }
+
+        body {
+            font-family: 'Public Sans', sans-serif;
+        }
+
+        label {
+            font-size:16px;
+            font-weight: 200;
+            color: rgb(33, 37, 41);
+        }
+
+        .row {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .payButtonContainer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #payButton {
+            background-color: rgb(50, 22, 93);
+            color: white;
+        }
+
+        .paymentTypeContainer {
+            text-align: center;
+        }
+
+        .button {
+            border-radius: 20px;
+            padding: 10px 35px;
+            font-size: 16px;
+            font-weight: bolder;
+            border: none;
+        }
+
+        .paymentTypeButton {
+            border: 5px solid rgb(50, 22, 93);
+            color: rgb(50, 22, 93);
+            background-color: rgb(245, 245, 245)
+        }
+
+        .paymentTypeButton.paymentTypeButton--active {
+            background-color: rgb(50, 22, 93);
+            color: white;
+        }
+
+        section {
+            margin: 50px auto;
+            padding: 40px 60px;
+            box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 100px 0px;
+            border-radius: 22px;
+        }
+
+        header {
+            height: 80px;
+        }
+
+        .paymentTypeCardData {
+            display: none;
+        }
+
+        .paymentTypeCardData.paymentTypeCardData--active {
+            display: block;
         }
     </style>
 </head>
 <body>
-<h1>Inline CollectJS Demo</h1>
-<form action="/your-page.php" method="post">
-    <table>
-        <tr>
-            <td>Amount: </td>
-            <td><input size="50" type="text" name="amount" value="1.00" /></td>
-        </tr>
-        <tr>
-            <td>First Name: </td>
-            <td><input size="50" type="text" name="first_name" value="Test" /></td>
-        </tr>
-        <tr>
-            <td>Last Name: </td>
-            <td><input size="50" type="text" name="last_name" value="User" /></td>
-        </tr>
-        <tr>
-            <td>Address1</td>
-            <td><input size="50" type="text" name="address1" value="123 Main Street"></td>
-        </tr>
-        <tr>
-            <td>City</td>
-            <td><input size="50" type="text" name="city" value="Beverley Hills"></td>
-        </tr>
-        <tr>
-            <td>State</td>
-            <td><input size="50" type="text" name="state" value="CA"></td>
-        </tr>
-        <tr>
-            <td>zip</td>
-            <td><input size="50" type="text" name="zip" value="90210"></td>
-        </tr>
-        <tr>
-            <td>country</td>
-            <td><input size="50" type="text" name="country" value="US"></td>
-        </tr>
-        <tr>
-            <td>phone</td>
-            <td><input size="50" type="text" name="phone" value="5555555555"></td>
-        </tr>
-        <tr>
-            <td>CC Number</td>
-            <td id="demoCcnumber"></td>
-        </tr>
-        <tr>
-            <td>CC Exp</td>
-            <td id="demoCcexp"></td>
-        </tr>
-        <tr>
-            <td>CVV</td>
-            <td id="demoCvv"></td>
-        </tr>
-        <tr>
-            <td>Account Number</td>
-            <td id="demoCheckaccount"></td>
-        </tr>
-        <tr>
-            <td>Routing Number</td>
-            <td id="demoCheckaba"></td>
-        </tr>
-        <tr>
-            <td>Name on Account</td>
-            <td id="demoCheckname"></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="googlePayButton"></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="applePayButton"></td>
-        </tr>
-    </table>
-    <br>
-    <button id="demoPayButton" type="button">Pay the money.</button>
-</form>
+<div class="container">
+    <header></header>
+    <div class="main">
+        <section class="formContainer">
+            <h2>Checkout</h2>
+            <form>
+                <div class="form">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="googlePayButton"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="applePayButton"></div>
+                        </div>
+                    </div>
+
+                    <div class="paymentTypeContainer">
+                        <button class="paymentTypeButton paymentTypeButton--card paymentTypeButton--active button">Credit Card</button>
+                        <button class="paymentTypeButton paymentTypeButton--check button">Electronic Check</button>
+                    </div>
+
+                    <div class="paymentTypeCardData paymentTypeCardData--card paymentTypeCardData--active">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>
+                                    Card Number
+                                </label>
+                                <div id="ccnumber"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>
+                                    Card Expiration
+                                </label>
+                                <div id="ccexp"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>
+                                    CVV
+                                </label>
+                                <div id="cvv"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="paymentTypeCardData paymentTypeCardData--check">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>
+                                    Account Number
+                                </label>
+                                <div id="checkaccount"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>
+                                    Routing Number
+                                </label>
+                                <div id="checkaba"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>
+                                    Name on Account
+                                </label>
+                                <div id="checkname"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payButtonContainer">
+                        <button id="payButton" class="button">CHECKOUT</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+        <template id="resultTemplate">
+            <section class="resultContainer">
+                <h2>Result</h2>
+                <pre class="resultContent"></pre>
+            </section>
+        </template>
+    </div>
+</div>
+
+<script src="https://secure.nmi.com/token/Collect.js" data-tokenization-key="459Pr6-uj8NTQ-8G2Pcp-kpAZ5A" data-variant="inline"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        CollectJS.configure({
-            "paymentSelector" : "#demoPayButton",
-            "variant" : "inline",
-            "styleSniffer" : "false",
-            "googleFont": "Montserrat:400",
-            "customCss" : {
-                "color": "#0000ff",
-                "background-color": "#d0d0ff"
-            },
-            "invalidCss": {
-                "color": "white",
-                "background-color": "red"
-            },
-            "validCss": {
-                "color": "black",
-                "background-color": "#d0ffd0"
-            },
-            "placeholderCss": {
-                "color": "green",
-                "background-color": "#808080"
-            },
-            "focusCss": {
-                "color": "yellow",
-                "background-color": "#202020"
-            },
-            "fields": {
-                "ccnumber": {
-                    "selector": "#demoCcnumber",
-                    "title": "Card Number",
-                    "placeholder": "0000 0000 0000 0000"
-                },
-                "ccexp": {
-                    "selector": "#demoCcexp",
-                    "title": "Card Expiration",
-                    "placeholder": "00 / 00"
-                },
-                "cvv": {
-                    "display": "show",
-                    "selector": "#demoCvv",
-                    "title": "CVV Code",
-                    "placeholder": "***"
-                },
-                "checkaccount": {
-                    "selector": "#demoCheckaccount",
-                    "title": "Account Number",
-                    "placeholder": "0000000000"
-                },
-                "checkaba": {
-                    "selector": "#demoCheckaba",
-                    "title": "Routing Number",
-                    "placeholder": "000000000"
-                },
-                "checkname": {
-                    "selector": "#demoCheckname",
-                    "title": "Name on Checking Account",
-                    "placeholder": "Customer McCustomerface"
-                },
-                "googlePay": {
-                    "selector": ".googlePayButton",
-                    "shippingAddressRequired": true,
-                    "shippingAddressParameters": {
-                        "phoneNumberRequired": true,
-                        "allowedCountryCodes": ['US', 'CA']
-                    },
-                    "billingAddressRequired": true,
-                    "billingAddressParameters": {
-                        "phoneNumberRequired": true,
-                        "format": "MIN"
-                    },
-                    'emailRequired': true,
-                    "buttonType": "buy",
-                    "buttonColor": "white",
-                    "buttonLocale": "en"
-                },
-                'applePay' : {
-                    'selector' : '.applePayButton',
-                    'shippingMethods': [
-                        {
-                            'label': 'Free Standard Shipping',
-                            'amount': '0.00',
-                            'detail': 'Arrives in 5-7 days',
-                            'identifier': 'standardShipping'
-                        },
-                        {
-                            'label': 'Express Shipping',
-                            'amount': '10.00',
-                            'detail': 'Arrives in 2-3 days',
-                            'identifier': 'expressShipping'
-                        }
-                    ],
-                    'shippingType': 'delivery',
-                    'requiredBillingContactFields': [
-                        'postalAddress',
-                        'name'
-                    ],
-                    'requiredShippingContactFields': [
-                        'postalAddress',
-                        'name'
-                    ],
-                    'contactFields': [
-                        'phone',
-                        'email'
-                    ],
-                    'contactFieldsMappedTo': 'shipping',
-                    'lineItems': [
-                        {
-                            'label': 'Foobar',
-                            'amount': '3.00'
-                        },
-                        {
-                            'label': 'Arbitrary Line Item #2',
-                            'amount': '1.00'
-                        }
-                    ],
-                    'totalLabel': 'foobar',
-                    'type': 'buy',
-                    'style': {
-                        'button-style': 'white-outline',
-                        'height': '50px',
-                        'border-radius': '0'
-                    }
-                }
-            },
-            'price': '1.00',
-            'currency':'USD',
-            'country': 'US',
-            'validationCallback' : function(field, status, message) {
-                if (status) {
-                    var message = field + " is now OK: " + message;
-                } else {
-                    var message = field + " is now Invalid: " + message;
-                }
-                console.log(message);
-            },
-            "timeoutDuration" : 2000,
-            "timeoutCallback" : function () {
-                console.log("The tokenization didn't respond in the expected timeframe.  This could be due to an invalid or incomplete field or poor connectivity");
-            },
-            "fieldsAvailableCallback" : function () {
-                console.log("Collect.js loaded the fields onto the form");
-            },
-            'callback' : function(response) {
-                alert(response.token);
-                var input = document.createElement("input");
-                input.type = "hidden";
-                input.name = "payment_token";
-                input.value = response.token;
-                var form = document.getElementsByTagName("form")[0];
-                form.appendChild(input);
-                form.submit();
-            }
+    function deleteSection(className) {
+        const sectionsToDelete = document.querySelectorAll(className).forEach((section) => {
+            section.remove();
         });
+    }
+
+    function mountResult(e) {
+        deleteSection('.resultContainer');
+
+        const template = document.querySelector('#resultTemplate');
+        const clone = template.content.cloneNode(true);
+        clone.querySelector('.resultContent').textContent = JSON.stringify(e, null, 2);
+
+        document.querySelector('.main').appendChild(clone);
+    }
+
+    function configureCollectJS() {
+        CollectJS.configure({
+            "customCss" : {
+                "border": "solid 1px #32165d08",
+                "background-color": "#F7F5FA",
+                "border-radius": "5px",
+                "padding": "5px 20px",
+                "height": "32"
+            },
+            'fields' : {
+                "ccnumber" : {
+                    "selector" : "#ccnumber",
+                    "title": "Card Number",
+                    "placeholder": ""
+                },
+                "ccexp" : {
+                    "selector" : "#ccexp",
+                    "title": "Card Expiration",
+                    "placeholder": "MM/YY"
+                },
+                "cvv" : {
+                    "selector" : "#cvv",
+                    "title": "CVV",
+                    "placeholder": ""
+                }
+            },
+            "country": "US",
+            "currency": "USD",
+            "price": "1.00",
+            "callback": function(e) {
+                mountResult(e);
+            }
+        })
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+        var cardButton = document.querySelector('.paymentTypeButton--card');
+        var checkButton = document.querySelector('.paymentTypeButton--check');
+        var cardFields = document.querySelector('.paymentTypeCardData--card');
+        var checkFields = document.querySelector('.paymentTypeCardData--check');
+
+        configureCollectJS();
+
+        cardButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            checkButton.classList.remove('paymentTypeButton--active')
+            cardButton.classList.add('paymentTypeButton--active')
+            checkFields.classList.remove('paymentTypeCardData--active')
+            cardFields.classList.add('paymentTypeCardData--active')
+            configureCollectJS();
+        })
+
+        checkButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            cardButton.classList.remove('paymentTypeButton--active')
+            checkButton.classList.add('paymentTypeButton--active')
+            cardFields.classList.remove('paymentTypeCardData--active')
+            checkFields.classList.add('paymentTypeCardData--active')
+            configureCollectJS();
+        })
     });
 </script>
 </body>
