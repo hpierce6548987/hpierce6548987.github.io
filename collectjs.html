@@ -221,6 +221,14 @@
             "price": "1.00",
             "callback": function(e) {
                 mountResult(e);
+            },
+            applePay: {
+                requiredBillingContactFields: ['name'],
+                contactFields: ['phone', 'email'],
+                contactFieldsMappedTo: 'billing',
+                totalLabel: 'Total',
+                type: 'plain',
+
             }
         })
     }
